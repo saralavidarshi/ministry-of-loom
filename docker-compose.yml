@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: eol-db
+    environment:
+      POSTGRES_USER: eol
+      POSTGRES_PASSWORD: eol_pass
+      POSTGRES_DB: eol_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - eol_pgdata:/var/lib/postgresql/data
+
+volumes:
+  eol_pgdata:
