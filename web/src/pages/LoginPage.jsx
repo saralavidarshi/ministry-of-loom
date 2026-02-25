@@ -19,6 +19,8 @@ export default function LoginPage() {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.user.role);
+      localStorage.setItem("email", res.data.user.email);
+
 
       setSuccess(`Logged in as ${res.data.user.role}`);
       navigate("/admin");

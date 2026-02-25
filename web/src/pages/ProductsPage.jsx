@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { fetchProducts } from "../api/products";
+import { useCart } from "../context/CartContext";
 
 export default function ProductsPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { addToCart } = useCart();
 
   useEffect(() => {
     (async () => {
@@ -45,6 +47,9 @@ export default function ProductsPage() {
             <p>{p.category}</p>
 
             <button data-testid={`product-open-${p.id}`}>View</button>
+            <button onClick={() => addToCart(p)}>
+              Add to Cart
+            </button>
           </div>
         ))}
       </div>

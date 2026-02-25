@@ -14,3 +14,6 @@ export const adminDeleteProduct = async (id) => {
   const res = await http.delete(`/admin/products/${id}`);
   return res.data;
 };
+
+
+
