@@ -11,7 +11,7 @@ export default function ProductDetailsPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await http.get("/products"); // MVP: reuse existing endpoint
+        const res = await http.get("/products");
         const found = res.data.items.find((p) => p.id === id);
 
         if (!found) {
