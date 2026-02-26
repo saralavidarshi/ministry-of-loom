@@ -6,7 +6,7 @@ const {
   deleteProduct
 } = require("../services/product.service");
 
-// Simple validation (keep it minimal for demo)
+
 function validateProduct(req, res, next) {
   const { name, description, price, category, inventory_count } = req.body;
 
@@ -19,7 +19,7 @@ function validateProduct(req, res, next) {
   next();
 }
 
-// ADMIN only
+
 router.post(
   "/admin/products",
   authenticate,
