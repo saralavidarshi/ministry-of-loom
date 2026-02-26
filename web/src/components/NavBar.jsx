@@ -11,6 +11,7 @@ export default function Navbar() {
 
   const isLoggedIn = !!token;
   const isAdmin = role === "ADMIN";
+  const isCustomer = role === "CUSTOMER";
 
   function logout() {
     localStorage.removeItem("token");
@@ -31,9 +32,11 @@ export default function Navbar() {
       data-testid="navbar"
     >
       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-        <Link to="/products" data-testid="nav-products">
-          Products
-        </Link>
+        {!isAdmin && (
+          <Link to="/products" data-testid="nav-products">
+            Products
+          </Link>
+        )}
 
         {isAdmin && (
           <Link to="/admin" data-testid="nav-admin">
@@ -43,6 +46,18 @@ export default function Navbar() {
       </div>
 
       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+        {isLoggedIn && isCustomer && (
+          <>
+            <Link to="/cart" data-testid="nav-cart">
+              Cart ({cartCount})
+            </Link>
+            <Link to="/orders" data-testid="nav-orders">
+              Orders
+            </Link>
+          </>
+        )}
+
+        {/* Auth */}
         {isLoggedIn ? (
           <>
             <span data-testid="nav-user">
@@ -56,9 +71,7 @@ export default function Navbar() {
           <Link to="/login" data-testid="nav-login">
             Login
           </Link>
-    
         )}
-        <a href="/cart">Cart ({cartCount})</a>
       </div>
     </div>
   );
