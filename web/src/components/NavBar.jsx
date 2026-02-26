@@ -21,58 +21,52 @@ export default function Navbar() {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "14px 20px",
-        borderBottom: "1px solid #ddd",
-      }}
-      data-testid="navbar"
-    >
-      <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-        {!isAdmin && (
+
+    <div>
+      {<header className="border-b">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div className="text-sm font-semibold tracking-widest">MINISTRY OF LOOM</div>
+
+          <nav className="hidden items-center gap-6 text-xs tracking-widest text-gray-700 md:flex">
+      {!isAdmin && (
           <Link to="/products" data-testid="nav-products">
-            Products
+            PRODUCTS
           </Link>
         )}
 
-        {isAdmin && (
-          <Link to="/admin" data-testid="nav-admin">
-            Admin
-          </Link>
-        )}
-      </div>
+            {isLoggedIn && isCustomer && (
+              <>
+                <Link to="/cart" data-testid="nav-cart">
+                  CART ({cartCount})
+                </Link>
+                <Link to="/orders" data-testid="nav-orders">
+                  ORDERS
+                </Link>
+              </>
+            )}
 
-      <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-        {isLoggedIn && isCustomer && (
-          <>
-            <Link to="/cart" data-testid="nav-cart">
-              Cart ({cartCount})
-            </Link>
-            <Link to="/orders" data-testid="nav-orders">
-              Orders
-            </Link>
-          </>
-        )}
+          {isLoggedIn ? (
+            <>
+              <span data-testid="nav-user">
+                {email} ({role})
+              </span>
+              <button onClick={logout} data-testid="nav-logout">
+                LOGOUT
+              </button>
+            </>
+          ) : (
+              <Link className="hover:text-black" to="/login">LOGIN</Link>
+          )}
 
-        {/* Auth */}
-        {isLoggedIn ? (
-          <>
-            <span data-testid="nav-user">
-              {email} ({role})
-            </span>
-            <button onClick={logout} data-testid="nav-logout">
-              Logout
-            </button>
-          </>
-        ) : (
-          <Link to="/login" data-testid="nav-login">
-            Login
-          </Link>
-        )}
-      </div>
+
+
+          </nav>
+        
+         </div>
+      </header>}
+
+
     </div>
+
   );
 }
