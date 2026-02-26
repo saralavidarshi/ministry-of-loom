@@ -16,7 +16,7 @@ export default function CartPage() {
       await createOrder(payload);
 
       clearCart();
-      navigate("/orders"); // we will build this page next
+      navigate("/orders");
     } catch (e) {
       alert(e?.response?.data?.error || "Checkout failed");
     }
