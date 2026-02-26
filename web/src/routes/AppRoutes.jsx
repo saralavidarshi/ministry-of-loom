@@ -1,29 +1,23 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import ProtectedRoute from "../components/ProtectedRoute";
-import ProductDetailsPage from "../pages/ProductDetailsPage";
-import ProductsPage from "../pages/ProductsPage";
 
+import Layout from "../components/Layout";
+import ProtectedRoute from "../components/ProtectedRoute";
+
+import ProductsPage from "../pages/ProductsPage";
+import ProductDetailsPage from "../pages/ProductDetailsPage";
 import CartPage from "../pages/CartPage";
 import OrdersPage from "../pages/OrdersPage";
-import AdminPage from "../pages/AdminPage";
 import LoginPage from "../pages/LoginPage";
+import AdminPage from "../pages/AdminPage";
 import ForbiddenPage from "../pages/ForbiddenPage";
 
-export default function App() {
+export default function AppRoutes() {
   return (
-    <>
-  
-
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/" element={<Navigate to="/products" replace />} />
-
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/forbidden" element={<ForbiddenPage />} />
-
-      
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductDetailsPage />} />
-
 
         <Route
           path="/cart"
@@ -42,18 +36,18 @@ export default function App() {
           }
         />
 
-
         <Route
           path="/admin"
           element={
-            <ProtectedRoute allowedRoles={["ADMIN"]} redirectTo="/products">
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
               <AdminPage />
             </ProtectedRoute>
           }
         />
 
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
-    </>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/forbidden" element={<ForbiddenPage />} />
+      </Route>
+    </Routes>
   );
 }
